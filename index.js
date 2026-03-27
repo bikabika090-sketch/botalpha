@@ -1,5 +1,6 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, AttachmentBuilder } = require('discord.js');
+const path = require('path');
 
 const client = new Client({
     intents: [
@@ -12,12 +13,11 @@ client.on('guildMemberAdd', async (member) => {
     const channel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL);
     if (!channel) return;
 
-    const avatar = member.user.displayAvatarURL({ extension: 'png' });
-    const image = `https://api.popcat.xyz/welcomecard?background=https://i.imgur.com/3ZUrjUP.png&text1=Welcome&text2=${member.user.username}&text3=Member&avatar=${avatar}`;
+    const file = new AttachmentBuilder(path.join(__dirname, 'background.png'));
 
     channel.send({
-        content: `🎉 Welcome ${member}`,
-        files: [image]
+        content: `🔥 Welcome to Alpha Server ${member}`,
+        files: [file]
     });
 });
 
@@ -25,12 +25,11 @@ client.on('guildMemberRemove', async (member) => {
     const channel = member.guild.channels.cache.get(process.env.WELCOME_CHANNEL);
     if (!channel) return;
 
-    const avatar = member.user.displayAvatarURL({ extension: 'png' });
-    const image = `https://api.popcat.xyz/welcomecard?background=https://i.imgur.com/8Km9tLL.png&text1=Goodbye&text2=${member.user.username}&text3=Left&avatar=${avatar}`;
+    const file = new AttachmentBuilder(path.join(__dirname, 'background.png'));
 
     channel.send({
         content: `😢 Goodbye ${member.user.tag}`,
-        files: [image]
+        files: [file]
     });
 });
 
