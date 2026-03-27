@@ -1,5 +1,5 @@
 {
-  "name": "discord-bot-custom-image",
+  "name": "discord-bot-canvas-pro",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
     "node": "18.x"
   },
   "dependencies": {
+    "canvas": "^2.11.2",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   }
